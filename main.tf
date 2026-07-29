@@ -33,3 +33,23 @@ module "service_accounts" {
     module.apis
   ]
 }
+
+
+
+module "iam" {
+
+  source = "./modules/iam"
+
+  project_id = var.project_id
+
+  github_service_account_email =
+    module.service_accounts.github_service_account_email
+
+  runtime_service_account_email =
+    module.service_accounts.runtime_service_account_email
+
+  depends_on = [
+    module.service_accounts
+  ]
+
+}
