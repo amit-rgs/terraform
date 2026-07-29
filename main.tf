@@ -53,3 +53,29 @@ module "iam" {
   ]
 
 }
+
+
+
+module "cloud_run" {
+
+  source = "./modules/cloud-run"
+  project_id = var.project_id
+  region = var.region
+  service_name = var.cloud_run_service_name
+  image = "${module.artifact_registry.repository_url}/${var.image_name}:latest"
+
+  service_account_email =
+    module.service_accounts.runtime_service_account_email
+  cpu = var.cpu
+  memory = var.memory
+  container_port = var.container_port
+  min_instances = var.min_instances
+  max_instances = var.max_instances
+  environment = var.environment
+  labels = var.labels
+
+  depends_on = [
+    module.artifact_registry,
+    module.iam
+  ]
+}
