@@ -20,3 +20,16 @@ module "artifact_registry" {
     module.apis
   ]
 }
+
+
+module "service_accounts" {
+
+  source = "./modules/service-account"
+  project_id = var.project_id
+  github_service_account_name = var.github_service_account_name
+  runtime_service_account_name = var.runtime_service_account_name
+
+  depends_on = [
+    module.apis
+  ]
+}
