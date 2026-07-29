@@ -11,7 +11,7 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket = "cq-test-statefile-sg"
-    prefix = "terraform/test/state"
+    bucket = "rgs-terraform-state"
+    prefix = "cloudrun/frontend"
   }
 }
